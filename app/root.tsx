@@ -1,11 +1,12 @@
 import type { LinksFunction } from "@remix-run/node";
 import { Links, LiveReload, Scripts } from "@remix-run/react";
+import faviconAssetUrl from "./assets/favicon.svg";
 
 export const links: LinksFunction = () => {
   return [
     {
       rel: "icon",
-      href: "/favicon.svg",
+      href: faviconAssetUrl,
       type: "image/svg+xml",
     },
   ];
