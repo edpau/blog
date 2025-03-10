@@ -15,7 +15,8 @@
     "test": "playwright test",
     "start": "remix-serve build/index.js",
     "lint": "eslint .",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "postinstall": "npm install @remix-run/dev" 
   },
   "keywords": [],
   "author": "",
