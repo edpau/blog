@@ -8,12 +8,12 @@
     "#*": "./*"
   },
   "scripts": {
-    "build": "run-s build:*",
+    "build": "npm run build:remix && npm run build:server",
     "build:remix": "remix build --sourcemap",
     "build:server": "tsx ./other/build-server.ts",
     "dev": "remix dev --manual -c \"node ./server/dev-server.js\"",
     "test": "playwright test",
-    "start": "remix-serve build",
+    "start": "remix-serve build/index.js",
     "lint": "eslint .",
     "typecheck": "tsc"
   },
