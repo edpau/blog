@@ -8,7 +8,7 @@
     "#*": "./*"
   },
   "scripts": {
-    "build": "npm run build:remix && npm run build:server",
+    "build": "npm install && npm run build:remix && npm run build:server",
     "build:remix": "remix build --sourcemap",
     "build:server": "tsx ./other/build-server.ts",
     "dev": "remix dev --manual -c \"node ./server/dev-server.js\"",
