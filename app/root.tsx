@@ -41,12 +41,15 @@ export default function App() {
 			<head>
 				<Links />
 			</head>
-			<body className="bg-background text-foreground flex h-full flex-col justify-between">
+			<body className="flex h-full flex-col justify-between bg-background text-foreground">
 				<header className="container mx-auto py-6">
 					<nav className="flex justify-between">
 						<Link to="/">
 							<div className="font-light">epic</div>
 							<div className="font-bold">notes</div>
+						</Link>
+						<Link className="underline" to="users/kody/notes/d27a197e">
+							Kody's Notes
 						</Link>
 					</nav>
 				</header>

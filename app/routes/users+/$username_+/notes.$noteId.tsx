@@ -1,9 +1,13 @@
 import { useParams } from '@remix-run/react'
 export default function NoteRoute() {
 	const params = useParams()
+
 	return (
-		<div className="container border-8 border-red-500 pt-12">
-			<h2 className="text-h2">{params.noteId}</h2>
+		<div className="absolute inset-0 flex flex-col px-10">
+			<h2 className='mb-2 pt-12 text-h2 lg:mb-6'>{params.noteId}</h2>
+			<div className='overflow-y-auto pb-24'>
+				<p className=''>Note content goes here...</p>
+			</div>
 		</div>
 	)
 }
