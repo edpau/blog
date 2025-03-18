@@ -6,7 +6,7 @@
 ### 04. Compiling CSS- add Tailwind CSS and PostCSS setup
 ### 05. 05. Bundling CSS- using cssBundleHref
 
-## Routing
+## Routing- Remix-flat-routes
 ### 01. Routes, layout nesting, url nesting, index route
 ### 02. Links- Link, NavLink, relative route 
 ### 03. Route Params- $ route params, useParams(), cn()
