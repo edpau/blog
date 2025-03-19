@@ -1,9 +1,36 @@
-import { Link, NavLink, Outlet, useParams } from '@remix-run/react'
+import { json, type LoaderFunctionArgs } from '@remix-run/node'
+import { Link, NavLink, Outlet, useLoaderData } from '@remix-run/react'
+import { db } from '#app/utils/db.server.ts'
 import { cn } from '#app/utils/misc.tsx'
 
+export async function loader({ params }: LoaderFunctionArgs) {
+	const { username } = params
+
+	const owner = db.user.findFirst({
+		where: {
+			username: { equals: username },
+		},
+	})
+	const notes = db.note.findMany({
+		where: {
+			owner: {
+				username: { equals: username },
+			},
+		},
+	})
+
+	return json({
+		owner: {
+			name: owner.name,
+			username: owner.username,
+		},
+		notes: notes.map(note => ({ id: note.id, title: note.title })),
+	})
+}
+
 export default function NotesRoute() {
-	const params = useParams()
-	const ownerDisplayName = params.username
+	const data = useLoaderData<typeof loader>()
+	const ownerDisplayName = data.owner.name ?? data.owner.username
 	const navLinkDefaultClassName =
 		'line-clamp-2 block rounded-l-full py-2 pl-8 pr-6 text-base lg:text-xl'
 
@@ -18,16 +45,18 @@ export default function NotesRoute() {
 							</h1>
 						</Link>
 						<ul className="overflow-y-auto overflow-x-hidden pb-12">
-							<li className="p1 pr-0">
-								<NavLink
-									to="some-note-id"
-									className={({ isActive }) =>
-										cn(navLinkDefaultClassName, isActive && 'bg-accent')
-									}
-								>
-									Some Note
-								</NavLink>
-							</li>
+							{data.notes.map(note => (
+								<li key={note.id} className="p1 pr-0">
+									<NavLink
+										to={note.id}
+										className={({ isActive }) =>
+											cn(navLinkDefaultClassName, isActive && 'bg-accent')
+										}
+									>
+										{note.title}
+									</NavLink>
+								</li>
+							))}
 						</ul>
 					</div>
 				</div>
